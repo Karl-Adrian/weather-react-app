@@ -94,3 +94,10 @@ main {
   text-align: center;
   box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
 }
+
+.weather-box .weather {
+  color: #fff;
+  font-size: 48px;
+  font-weight: 700;
+  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
+}
