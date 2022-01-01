@@ -3,8 +3,7 @@ const api = {
   key: "1cda513a15c55501c13ff9604305c7e4",
   base: "https://api.openweathermap.org/data/2.5/",
 };
-
-function App() {
+const App = () => {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
 
@@ -23,7 +22,7 @@ function App() {
     let months = [
       "January",
       "February",
-      "March", 
+      "March",
       "April",
       "May",
       "June",
@@ -44,7 +43,7 @@ function App() {
     return `${day} ${date} ${month} ${year}`;
   };
   return (
-    <div className="app">
+    <div className={(typeof weather.main != "undefined") ? (weather.main.temp > 16) ? 'app warm' : 'app' : 'app'}>
       <main>
         <div className="search-box">
           <input
@@ -56,21 +55,22 @@ function App() {
             onKeyPress={search}
           />
         </div>
-        {(typeof weather.main != "undefined") ? (
-        <div>
-          <div className="location-box">
-            <div className="location">{weather.name}, {weather.sys.country}</div>
-            <div className="date">{dateBuilder(new Date())}</div>
+        {typeof weather.main != "undefined" ? (
+          <div>
+            <div className="location-box">
+              <div className="location">
+                {weather.name}, {weather.sys.country}
+              </div>
+              <div className="date">{dateBuilder(new Date())}</div>
+            </div>
+            <div className="weather-box">
+              <div className="temp">{Math.round(weather.main.temp)}°c</div>
+              <div className="weather">{weather.weather[0].main}</div>
+            </div>
           </div>
-          <div className="weather-box">
-            <div className="temp">15°c</div>
-            <div className="weather">Sunny</div>
-          </div>
-        </div>
-
-
-        ) : ('')}
-      
+        ) : (
+          ""
+        )}
       </main>
     </div>
   );
